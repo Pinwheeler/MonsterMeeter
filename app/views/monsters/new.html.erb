@@ -1,0 +1,18 @@
+<h1>New Monster</h1>
+
+<%= form_for :monster, url: monsters_path do |f| %>
+    <p>
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+    </p>
+    <p>
+        <%= f.label :cr %><br>
+        <%= f.text_field :cr %>
+    </p>
+    
+    <p>
+        <%= f.submit %>
+    </p>
+<% end %>
+
+<%= link_to 'Main', monsters_path %>

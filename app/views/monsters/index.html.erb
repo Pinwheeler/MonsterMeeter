@@ -1,0 +1,17 @@
+<h1>All Monsters</h1>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>CR</th>
+    </tr>
+    
+    <% @monsters.each do |monster| %>
+        <tr>
+            <td><%= monster.name %></td>
+            <td><%= monster.cr %></td>
+        </tr>
+    <% end %>
+</table>
+
+<% link_to 'Back', monsters_path %>
