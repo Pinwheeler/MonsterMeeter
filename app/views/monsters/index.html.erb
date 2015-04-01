@@ -4,14 +4,15 @@
     <tr>
         <th>Name</th>
         <th>CR</th>
+        <th colspan="2"></th>
     </tr>
     
     <% @monsters.each do |monster| %>
         <tr>
             <td><%= monster.name %></td>
             <td><%= monster.cr %></td>
+            <td><%= link_to 'Show', monsters_path(monster) %></td>
+            <td><%= link_to 'Edit', edit_monster_path(monster) %></td>
         </tr>
     <% end %>
 </table>
-
-<% link_to 'Back', monsters_path %>

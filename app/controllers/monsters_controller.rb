@@ -9,14 +9,38 @@ class MonstersController < ApplicationController
     end
     
     def new
-        
+        @monster = Monster.new
+    end
+    
+    def edit
+        @monster = Monster.find(params[:id])
     end
     
     def create
         @monster = Monster.new(monster_params)
         
-        @monster.save
-        redirect_to @monster
+        if @monster.save
+            redirect_to @monster
+        else
+            render 'new'
+        end
+    end
+    
+    def update
+        @monster = Monster.find(params[:id])
+        
+        if @monster.update(monster_params)
+            redirect_to @monster
+        else
+            render 'edit'
+        end
+    end
+    
+    def destroy
+        @monster = Monster.find(params[:id])
+        @monster.destroy
+        
+        redirect_to monsters_path
     end
     
     private
