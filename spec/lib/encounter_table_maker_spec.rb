@@ -1,16 +1,7 @@
 require "encounter_table_maker"
 require "rails_helper"
 
-def overall_cr_for_monster_array(monster_array)
-    raw_cr_sum = 0.0
-    monster_array.each do |monster|
-         raw_cr_sum += monster.cr
-    end
-    group_size_factor = (monster_array.length) / 4
-    overall_cr = raw_cr_sum * group_size_factor
-    # puts "Overall CR is: #{overall_cr}\n for encounter: #{monster_array}"
-    overall_cr
-end
+
 
 describe EncounterTableMaker do
     
@@ -39,8 +30,21 @@ describe EncounterTableMaker do
             end
             
             it "should generate significantly harder monsters at the first indices" do
-                expect(overall_cr_for_monster_array(encounters_array[0]) >= (party_cr * 2)).to be_truthy
-                expect(overall_cr_for_monster_array(encounters_array[1]) >= (party_cr * 1.5)).to be_truthy
+                expect(maker.overall_cr_for_monster_array(encounters_array[0]) >= (party_cr * 2)).to be_truthy
+                expect(maker.overall_cr_for_monster_array(encounters_array[1]) >= (party_cr * 1.5)).to be_truthy
+            end
+            
+            it "should generate a random assortment of encounters each time" do
+                encounters_array2 = maker.generate_array
+                (0..15).each do |i|
+                    expect(encounters_array[i]).to_not eq(encounters_array2[i]) 
+                end
+            end
+            
+            it "should generate no encounters that will instakill the party" do
+                encounters_array.each do |encounter_array|
+                     expect(maker.overall_cr_for_monster_array(encounter_array) <= (party_cr * 3)).to be_truthy
+                end
             end
         end
         

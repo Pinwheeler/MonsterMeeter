@@ -4,4 +4,8 @@ class Monster < ActiveRecord::Base
     accepts_nested_attributes_for :terrains
     
     validates :name, presence: true
+    
+    def to_s
+        "<Monster:: Name: #{name} CR: #{cr}>" 
+    end
 end
