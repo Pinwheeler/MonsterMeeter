@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   
   get 'welcome/index'
   
-  resources :monsters
+  resources :monsters do
+    get 'terrains', on: :member
+  end
+  
+  resources :terrains
   
   root 'welcome#index'
   

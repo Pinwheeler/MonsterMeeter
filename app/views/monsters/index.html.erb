@@ -4,7 +4,7 @@
     <tr>
         <th>Name</th>
         <th>CR</th>
-        <th colspan="2"></th>
+        <th colspan="3"></th>
     </tr>
     
     <% @monsters.each do |monster| %>
@@ -13,6 +13,12 @@
             <td><%= monster.cr %></td>
             <td><%= link_to 'Show', monsters_path(monster) %></td>
             <td><%= link_to 'Edit', edit_monster_path(monster) %></td>
+            <td><%= link_to 'Delete', monsters_path(monster),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
 </table>
+
+<%= link_to 'Main', welcome_index_path %> |
+<%= link_to 'Add Monster', new_monster_path %>

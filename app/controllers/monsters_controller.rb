@@ -45,6 +45,7 @@ class MonstersController < ApplicationController
     
     private
     def monster_params
-        params.require(:monster).permit(:name,:cr)
+        puts params
+        params.require(:monster).permit(:name, :cr, {terrain_ids: []})
     end
 end

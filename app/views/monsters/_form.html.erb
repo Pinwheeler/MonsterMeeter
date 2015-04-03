@@ -1,6 +1,6 @@
-<%= form_for :monster do |f| %>
+<%= form_for @monster do |f| %>
     <% if @monster.errors.any? %>
-        <div>
+        <div id="error_explanation">
             <h2>
                 <%= pluralize(@monster.errors.count, "error") %> prohibited this monster from being saved:
             </h2>
@@ -20,6 +20,14 @@
     <p>
         <%= f.label :cr %><br>
         <%= f.text_field :cr %>
+    </p>
+    
+    <p>
+        <%= f.label :terrain %><br>
+        <%= hidden_field_tag("monster[terrain_ids][]", nil) %>
+        <% Terrain.order(:name).each do |terrain| %>
+            <label><%= check_box_tag("monster[terrain_ids][]", terrain.id, terrain.id.in?(@monster.terrains.collect(&:id))) %> <%= terrain.name %></label>
+        <% end %>
     </p>
     
     <p>
