@@ -26,13 +26,10 @@ class EncounterTableMaker
         end
         while overall_cr_for_monster_array(encounter_array) < min_cr do
             potential_monster = random_monster
-            potential_array = encounter_array + [potential_monster]
-            # puts "overall cr: #{overall_cr_for_monster_array(encounter_array)} max_cr:#{max_cr} min_cr:#{min_cr}"
-            # puts "potential cr: #{overall_cr_for_monster_array(potential_array)} by adding monster: #{potential_monster}"
-            if overall_cr_for_monster_array(potential_array) <= max_cr
-                encounter_array << potential_monster 
+            while overall_cr_for_monster_array(encounter_array + [potential_monster]) <= max_cr
+                encounter_array << potential_monster
+                # puts encounter_array.inspect
             end
-            
         end
         encounter_array
     end
@@ -57,10 +54,20 @@ class EncounterTableMaker
         monster_array.each do |monster|
             raw_cr_sum += monster.cr
         end
-        average_cr = raw_cr_sum / monster_array.length
-        group_size_factor = (monster_array.length) * average_cr / 4 
-        overall_cr = raw_cr_sum * group_size_factor
+        
+        group_size_float = (monster_array.length / 10.0)
+        overall_cr = raw_cr_sum + group_size_float
         # puts "Overall CR is: #{overall_cr}\n for encounter: #{monster_array}"
         overall_cr
+    end
+    
+    def self.pretty_string_for_encounter(encounter_array)
+        pretty_string = ""
+        counts = Hash.new(0)
+        encounter_array.each { |type| counts[type] += 1 }
+        counts.each do |key, count|
+            pretty_string += "#{count}x #{key.name}, " 
+        end
+        pretty_string[0...-2]
     end
 end

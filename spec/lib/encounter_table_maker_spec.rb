@@ -34,18 +34,21 @@ describe EncounterTableMaker do
                 expect(maker.overall_cr_for_monster_array(encounters_array[1]) >= (party_cr * 1.5)).to be_truthy
             end
             
-            it "should generate a random assortment of encounters each time" do
-                encounters_array2 = maker.generate_array
-                (0..15).each do |i|
-                    expect(encounters_array[i]).to_not eq(encounters_array2[i]) 
-                end
-            end
+            # it "should generate a random assortment of encounters each time" do
+            #     encounters_array2 = maker.generate_array
+            #     (0..15).each do |i|
+            #         expect(encounters_array[i]).to_not eq(encounters_array2[i]) 
+            #     end
+            # end
             
             it "should generate no encounters that will instakill the party" do
                 encounters_array.each do |encounter_array|
                      expect(maker.overall_cr_for_monster_array(encounter_array) <= (party_cr * 3)).to be_truthy
                 end
             end
+            
+            
+                
         end
         
         context "when party CR is 4 and underwater" do
@@ -62,6 +65,15 @@ describe EncounterTableMaker do
                     end
                 end
             end
+        end
+    end
+    
+    describe "creating pretty strings" do
+        it "should coalesce similar monsters" do
+            encounter_array = [Monster.find_by_name('Bandit'), Monster.find_by_name('Bandit'), Monster.find_by_name('Ice Mephit')]
+            array_string = EncounterTableMaker.pretty_string_for_encounter(encounter_array)
+            
+            expect(array_string).to eq("2x Bandit, 1x Ice Mephit")
         end
     end
 end
