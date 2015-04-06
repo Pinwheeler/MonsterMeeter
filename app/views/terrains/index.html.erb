@@ -1,4 +1,10 @@
+<div class="container">
+<div class="content-block">
 <h1>All Terrain Types</h1>
+<div class="link-block">
+    <%= link_to 'Add Terrain', new_terrain_path %> | 
+    <%= link_to 'Main', welcome_index_path %>
+</div>
 
 <table>
     <tr>
@@ -9,14 +15,18 @@
     <% @terrains.each do |terrain| %>
         <tr>
             <td><%= terrain.name %></td>
-            <td><%= link_to 'Show', terrains_path(terrain) %></td>
+            <td><%= link_to 'Show', terrain_path(terrain) %></td>
             <td><%= link_to 'Edit', edit_terrain_path(terrain) %></td>
-            <td><%= link_to 'Delete', terrains_path(terrain),
+            <td><%= link_to 'Delete', terrain_path(terrain),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
 </table><br>
+<div class="link-block">
+    <%= link_to 'Add Terrain', new_terrain_path %> | 
+    <%= link_to 'Main', welcome_index_path %>
+</div>
 
-<%= link_to 'Add Terrain', new_terrain_path %><br>
-<%= link_to 'Main', welcome_index_path %>
+</div>
+</div>

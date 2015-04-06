@@ -1,5 +1,12 @@
-<h1>All Monsters</h1>
-
+<div class="container">
+<div class="content-block all-monsters">
+    <h1>All Monsters</h1>
+    <div class="link-block">
+        <%= link_to 'Main', welcome_index_path %> |
+        <%= link_to 'Add Monster', new_monster_path %>
+    </div>
+    
+<div class="scrollable table-container">
 <table>
     <tr>
         <th>Name</th>
@@ -11,14 +18,14 @@
         <tr>
             <td><%= monster.name %></td>
             <td><%= monster.cr %></td>
-            <td><%= link_to 'Show', monsters_path(monster) %></td>
+            <td><%= link_to 'Show', monster_path(monster) %></td>
             <td><%= link_to 'Edit', edit_monster_path(monster) %></td>
-            <td><%= link_to 'Delete', monsters_path(monster),
+            <td><%= link_to 'Delete', monster_path(monster),
                 method: :delete,
                 data: { confirm: 'Are you sure?' } %></td>
         </tr>
     <% end %>
 </table>
-
-<%= link_to 'Main', welcome_index_path %> |
-<%= link_to 'Add Monster', new_monster_path %>
+</div>
+</div>
+</div>

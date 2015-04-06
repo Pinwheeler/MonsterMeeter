@@ -1,3 +1,55 @@
 // Place all the styles related to the monsters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import 'palette';
+
+.all-monsters {
+    max-height: 90%;
+    
+    .table-container {
+        max-height: 600px
+    }
+}
+
+.content-block {
+    background: $beige;
+    border-radius: 15px;
+    border: 2px solid $taupe;
+    margin: auto;
+    padding: 20px;
+    width: 60%;
+    h1 {
+        text-align: center;
+    }
+    
+    .link-block {
+        text-align: center;
+    }
+    
+}
+
+.content-block.small {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    height: 350px;
+}
+
+.content-block.tiny {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    height: 150px;
+    text-align: center;
+}
+
+th,td {
+    padding: 15px;
+}

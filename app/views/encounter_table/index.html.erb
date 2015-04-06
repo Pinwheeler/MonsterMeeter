@@ -1,3 +1,5 @@
+<div class="container">
+<div class="encounters">
 <h1>Encounter Table</h1>
 <p class="tooltip">Selecting multiple terrain types allows you to pull from both terrain pools</p>
 <%= form_tag "/encounter_table/update" do |f| %>
@@ -6,9 +8,9 @@
         <% Terrain.order(:name).each do |terrain| %>
             <li><label><%= check_box_tag(terrain.name, terrain.name, terrain.in?(@encounter_terrain)) %> <%= terrain.name %></label></li>
         <% end %>
-    </ul>
-    <label class="field-label">Party CR:</label>
-    <%= text_field_tag :party_cr, @party_cr%><br>
+    </ul><br>
+    <p class="sub-list-paragraph"><label class="field-label">Party CR:</label>
+    <%= text_field_tag :party_cr, @party_cr%></p><br>
     <%= submit_tag "Create" %>
 <% end %>
 
@@ -38,3 +40,5 @@
 
 <%= link_to 'Main', welcome_index_path %>
 
+</div>
+</div>

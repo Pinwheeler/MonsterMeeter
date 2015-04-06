@@ -1,13 +1,17 @@
-<p>
-    <strong>Name:</strong>
-    <%= @monster.name %>
-</p>
-<p>
-    <strong>CR:</strong>
-    <%= @monster.cr %>
-</p>
+<div class="container">
+    <div class="content-block tiny">
+        <p>
+            <strong>Name:</strong>
+            <%= @monster.name %>
+        </p>
+        <p>
+            <strong>CR:</strong>
+            <%= @monster.cr %>
+        </p>
 
-<%= link_to 'Edit', edit_monster_path(@monster) %> |
-<%= link_to 'Back', monsters_path %> |
-<%= link_to 'Main', welcome_index_path %><br><br>
-<%= link_to 'Add Another Monster', new_monster_path %>
+        <%= link_to 'Main', welcome_index_path %> |
+        <%= link_to 'Back', monsters_path %> |
+        <%= link_to 'Edit', edit_monster_path(@monster) %><br><br>
+        <%= link_to 'Add Another Monster', new_monster_path %>
+    </div>
+</div>
