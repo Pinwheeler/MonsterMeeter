@@ -1,5 +1,3 @@
-require "rails_helper"
-
 class EncounterTableMaker
     def initialize (terrains, party_cr)
         @terrains = terrains

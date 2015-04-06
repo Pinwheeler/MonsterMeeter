@@ -1,0 +1,10 @@
+<h1>Encounter Table</h1>
+<%= form_tag "/encounter_table/update" do |f| %>
+    <label>Terrain</label>
+    <% Terrain.order(:name).each do |terrain| %>
+        <label><%= check_box_tag(terrain.name, terrain.name, false )%> <%= terrain.name %></label>
+    <% end %>   |   
+    <label>Party CR</label>
+    <%= text_field_tag :party_cr %>   |   
+    <%= submit_tag "Create" %>
+<% end %>

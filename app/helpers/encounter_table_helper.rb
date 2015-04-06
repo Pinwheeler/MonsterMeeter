@@ -1,0 +1,2 @@
+module EncounterTableHelper
+end
