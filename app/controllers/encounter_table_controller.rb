@@ -21,4 +21,15 @@ class EncounterTableController < ApplicationController
         @encounter_table = EncounterTableMaker.new(@encounter_terrain, @party_cr.to_f)
         render 'index'
     end
+    
+    def print
+        @encounter_print_list = []
+        @cr_print_list = []
+        @xp_print_list = []
+        (0..15).each do |i|
+            @encounter_print_list.push(params["encounter_#{i}"])
+            @cr_print_list.push(params["cr_#{i}"])
+            @xp_print_list.push(params["xp_#{i}"])
+        end
+    end
 end

@@ -1,33 +1,39 @@
 <h1>Encounter Table</h1>
-<p>selecting multiple terrain types allows you to pull from both terrain pools</p>
+<p class="tooltip">Selecting multiple terrain types allows you to pull from both terrain pools</p>
 <%= form_tag "/encounter_table/update" do |f| %>
-    <label>Terrain</label>
-    <% Terrain.order(:name).each do |terrain| %>
-        <label><%= check_box_tag(terrain.name, terrain.name, terrain.in?(@encounter_terrain)) %> <%= terrain.name %></label>
-    <% end %>   |   
-    <label>Party CR</label>
-    <%= text_field_tag :party_cr, @party_cr%>   |   
+    <label class="field-label">Terrain:</label>
+    <ul class="terrain-list">
+        <% Terrain.order(:name).each do |terrain| %>
+            <li><label><%= check_box_tag(terrain.name, terrain.name, terrain.in?(@encounter_terrain)) %> <%= terrain.name %></label></li>
+        <% end %>
+    </ul>
+    <label class="field-label">Party CR:</label>
+    <%= text_field_tag :party_cr, @party_cr%><br>
     <%= submit_tag "Create" %>
 <% end %>
 
 <% if @encounter_terrain && @party_cr%>
-    <p>Have players roll 3d6 for travel or overnights. The result of that roll is the encounter</p>
-    <table>
-        <tr>
-            <th>Roll</th>
-            <th>Encounter</th>
-            <th>Overall CR</th>
-            <th>Encounter XP</th>
-        </tr>
-        <% (0..15).each do |i| %>
+    <p class="tooltip">Have players roll 3d6 for travel or overnights. The result of that roll is the encounter</p>
+    <%= form_tag "/encounter_table/print", :target => "_blank" do |f| %>
+        <table class="input-table">
             <tr>
-                <td><%= i+3 %></td>
-                <td><%= EncounterTableMaker.pretty_string_for_encounter(@encounter_table.encounter_table[i]) %></td>
-                <td><%= @encounter_table.overall_cr_for_monster_array(@encounter_table.encounter_table[i]) %></td>
-                <td><%= EncounterTableMaker.xp_for_encounter(@encounter_table.encounter_table[i]) %></td>
+                <th>Roll</th>
+                <th>Encounter</th>
+                <th>Overall CR</th>
+                <th>Encounter XP</th>
             </tr>
-        <% end %>
-    </table>
+        
+            <% (0..15).each do |i| %>
+                <tr>
+                    <td><%= i+3 %></td>
+                    <td class="long-input"><%= text_field_tag "encounter_#{i}", EncounterTableMaker.pretty_string_for_encounter(@encounter_table.encounter_table[i]) %></td>
+                    <td><%= text_field_tag "cr_#{i}", @encounter_table.overall_cr_for_monster_array(@encounter_table.encounter_table[i]) %></td>
+                    <td><%= text_field_tag "xp_#{i}", EncounterTableMaker.xp_for_encounter(@encounter_table.encounter_table[i]) %></td>
+                </tr>
+            <% end %>
+        </table>
+        <%= submit_tag "Print" %>
+    <% end %>
 <% end %>
 
 <%= link_to 'Main', welcome_index_path %>

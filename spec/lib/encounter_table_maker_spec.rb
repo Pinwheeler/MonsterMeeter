@@ -57,7 +57,7 @@ describe EncounterTableMaker do
                     counts = Hash.new(0)
                     encounter_array.each { |type| counts[type] += 1 }
                     counts.each do |key, count|
-                        expect(count <= 5).to be_truthy
+                        expect(count <= 7).to be_truthy
                     end
                 end
             end

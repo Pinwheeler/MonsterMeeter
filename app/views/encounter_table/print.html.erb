@@ -1,0 +1,21 @@
+<h1>Random Encounters Table</h1>
+
+<p class="tooltip">Have players roll 3d6 for travel or overnights. The result of that roll is the encounter</p>
+
+<table class="print-table">
+    <tr>
+        <th>Roll</th>
+        <th>Encounter</th>
+        <th>Overall CR</th>
+        <th>Encounter XP</th>
+    </tr>
+        
+    <% (0..15).each do |i| %>
+        <tr>
+            <td><%= i+3 %></td>
+            <td><%= @encounter_print_list[i] %></td>
+            <td><%= @cr_print_list[i] %></td>
+            <td><%= @xp_print_list[i] %></td>
+        </tr>
+    <% end %>
+</table>

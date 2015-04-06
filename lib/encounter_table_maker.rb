@@ -33,7 +33,8 @@ class EncounterTableMaker
 
         while overall_cr_for_monster_array(encounter_array) < min_cr do
             potential_monster = random_monster
-            while overall_cr_for_monster_array(encounter_array + [potential_monster]) <= max_cr && monster_count_in_array(potential_monster, encounter_array) < 5
+            max_monster_count = rand(4..7)
+            while overall_cr_for_monster_array(encounter_array + [potential_monster]) <= max_cr && monster_count_in_array(potential_monster, encounter_array) < max_monster_count
                 encounter_array << potential_monster
                 # puts encounter_array.inspect
             end
