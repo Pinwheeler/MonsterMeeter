@@ -14,14 +14,15 @@ class EncounterTableMaker
         encounter_array = []
         min_cr = @party_cr*0.8
         max_cr = @party_cr*1.2
-        if i == 0
+        if i == 0 || i == 15
             min_cr = @party_cr * 2
             max_cr = @party_cr * 3
         end
-        if i == 1
+        if i == 1 || i == 14
             min_cr = @party_cr * 1.5
             max_cr = @party_cr * 2.5
         end
+
         while overall_cr_for_monster_array(encounter_array) < min_cr do
             potential_monster = random_monster
             while overall_cr_for_monster_array(encounter_array + [potential_monster]) <= max_cr
@@ -30,6 +31,10 @@ class EncounterTableMaker
             end
         end
         encounter_array
+    end
+    
+    def encounter_table
+        @encounter_table || generate_array
     end
     
     def random_monster
@@ -41,6 +46,7 @@ class EncounterTableMaker
         (0..15).each do |i|
             total_array << encounter_array_for_slot(i)
         end
+        @encounter_table = total_array
         total_array
     end
     
@@ -57,6 +63,10 @@ class EncounterTableMaker
         overall_cr = raw_cr_sum + group_size_float
         # puts "Overall CR is: #{overall_cr}\n for encounter: #{monster_array}"
         overall_cr
+    end
+    
+    def pretty_string_for_slot(i)
+       self.pretty_string_for_encounter(encounter_array_for_slot(i)) 
     end
     
     def self.pretty_string_for_encounter(encounter_array)

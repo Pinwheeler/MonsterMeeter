@@ -34,12 +34,10 @@ describe EncounterTableMaker do
                 expect(maker.overall_cr_for_monster_array(encounters_array[1]) >= (party_cr * 1.5)).to be_truthy
             end
             
-            # it "should generate a random assortment of encounters each time" do
-            #     encounters_array2 = maker.generate_array
-            #     (0..15).each do |i|
-            #         expect(encounters_array[i]).to_not eq(encounters_array2[i]) 
-            #     end
-            # end
+            it "should generate significantly harder monsters at the last indicies" do
+                expect(maker.overall_cr_for_monster_array(encounters_array[14]) >= (party_cr * 2)).to be_truthy
+                expect(maker.overall_cr_for_monster_array(encounters_array[15]) >= (party_cr * 1.5)).to be_truthy
+            end
             
             it "should generate no encounters that will instakill the party" do
                 encounters_array.each do |encounter_array|

@@ -8,3 +8,21 @@
     <%= text_field_tag :party_cr %>   |   
     <%= submit_tag "Create" %>
 <% end %>
+
+<% if @encounter_terrain && @party_cr%>
+    <table>
+        <tr>
+            <th>Roll</th>
+            <th>Encounter</th>
+            <th>Overall CR</th>
+        </tr>
+        <% (0..15).each do |i| %>
+            <tr>
+                <td><%= i+3 %></td>
+                <td><%= EncounterTableMaker.pretty_string_for_encounter(@encounter_table.encounter_table[i]) %></td>
+                <td><%= @encounter_table.overall_cr_for_monster_array(@encounter_table.encounter_table[i]) %></td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>
+
