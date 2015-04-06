@@ -1,28 +1,34 @@
 <h1>Encounter Table</h1>
+<p>selecting multiple terrain types allows you to pull from both terrain pools</p>
 <%= form_tag "/encounter_table/update" do |f| %>
     <label>Terrain</label>
     <% Terrain.order(:name).each do |terrain| %>
-        <label><%= check_box_tag(terrain.name, terrain.name, false )%> <%= terrain.name %></label>
+        <label><%= check_box_tag(terrain.name, terrain.name, terrain.in?(@encounter_terrain)) %> <%= terrain.name %></label>
     <% end %>   |   
     <label>Party CR</label>
-    <%= text_field_tag :party_cr %>   |   
+    <%= text_field_tag :party_cr, @party_cr%>   |   
     <%= submit_tag "Create" %>
 <% end %>
 
 <% if @encounter_terrain && @party_cr%>
+    <p>Have players roll 3d6 for travel or overnights. The result of that roll is the encounter</p>
     <table>
         <tr>
             <th>Roll</th>
             <th>Encounter</th>
             <th>Overall CR</th>
+            <th>Encounter XP</th>
         </tr>
         <% (0..15).each do |i| %>
             <tr>
                 <td><%= i+3 %></td>
                 <td><%= EncounterTableMaker.pretty_string_for_encounter(@encounter_table.encounter_table[i]) %></td>
                 <td><%= @encounter_table.overall_cr_for_monster_array(@encounter_table.encounter_table[i]) %></td>
+                <td><%= EncounterTableMaker.xp_for_encounter(@encounter_table.encounter_table[i]) %></td>
             </tr>
         <% end %>
     </table>
 <% end %>
+
+<%= link_to 'Main', welcome_index_path %>
 

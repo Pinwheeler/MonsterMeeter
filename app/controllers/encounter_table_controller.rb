@@ -4,6 +4,8 @@ class EncounterTableController < ApplicationController
     
     def index
         @encounter_table = EncounterTableMaker.new([],0.0)
+        @party_cr = nil
+        @encounter_terrain = []
     end
     
     def update

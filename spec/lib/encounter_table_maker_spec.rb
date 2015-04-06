@@ -29,6 +29,13 @@ describe EncounterTableMaker do
                 end
             end
             
+            it "should generate easier monsters in the middle indicies" do
+                expect(maker.overall_cr_for_monster_array(encounters_array[6]) <= (party_cr * 1.5)).to be_truthy
+                expect(maker.overall_cr_for_monster_array(encounters_array[7]) <= (party_cr * 1)).to be_truthy 
+                expect(maker.overall_cr_for_monster_array(encounters_array[8]) <= (party_cr * 1)).to be_truthy
+                expect(maker.overall_cr_for_monster_array(encounters_array[9]) <= (party_cr * 1.5)).to be_truthy 
+            end
+            
             it "should generate significantly harder monsters at the first indices" do
                 expect(maker.overall_cr_for_monster_array(encounters_array[0]) >= (party_cr * 2)).to be_truthy
                 expect(maker.overall_cr_for_monster_array(encounters_array[1]) >= (party_cr * 1.5)).to be_truthy
@@ -45,6 +52,15 @@ describe EncounterTableMaker do
                 end
             end
             
+            it "should generate no more than 5 of a given moster type" do
+                encounters_array.each do |encounter_array|
+                    counts = Hash.new(0)
+                    encounter_array.each { |type| counts[type] += 1 }
+                    counts.each do |key, count|
+                        expect(count <= 5).to be_truthy
+                    end
+                end
+            end
             
                 
         end
@@ -72,6 +88,16 @@ describe EncounterTableMaker do
             array_string = EncounterTableMaker.pretty_string_for_encounter(encounter_array)
             
             expect(array_string).to eq("2x Bandit, 1x Ice Mephit")
+        end
+    end
+    
+    describe 'calculating experience points' do
+        it "should be able to calculate the experience point total of an encounter" do
+            encounter_array = [Monster.find_by_name('Bandit'), Monster.find_by_name('Bandit'), Monster.find_by_name('Ice Mephit')]
+            encounter_array2 = [Monster.find_by_name('Bandit'), Monster.find_by_name('Ice Mephit')]
+            
+            expect(EncounterTableMaker.xp_for_encounter(encounter_array)).to eq(150)
+            expect(EncounterTableMaker.xp_for_encounter(encounter_array2)).to eq(125)
         end
     end
 end

@@ -22,10 +22,18 @@ class EncounterTableMaker
             min_cr = @party_cr * 1.5
             max_cr = @party_cr * 2.5
         end
+        if i == 6 || i == 9
+            min_cr = @party_cr * 0.5
+            max_cr = @party_cr * 1.5
+        end
+        if i == 7 || i == 8
+            min_cr = @party_cr * 0.1
+            max_cr = @party_cr 
+        end
 
         while overall_cr_for_monster_array(encounter_array) < min_cr do
             potential_monster = random_monster
-            while overall_cr_for_monster_array(encounter_array + [potential_monster]) <= max_cr
+            while overall_cr_for_monster_array(encounter_array + [potential_monster]) <= max_cr && monster_count_in_array(potential_monster, encounter_array) < 5
                 encounter_array << potential_monster
                 # puts encounter_array.inspect
             end
@@ -38,6 +46,7 @@ class EncounterTableMaker
     end
     
     def random_monster
+        srand
         @monster_pool[rand(@monster_pool.length)]
     end
     
@@ -65,6 +74,16 @@ class EncounterTableMaker
         overall_cr
     end
     
+    def monster_count_in_array(monster, array) 
+        count = 0
+        array.each do |counted_monster| 
+            if monster == counted_monster
+                count += 1
+            end
+        end
+        count
+    end
+    
     def pretty_string_for_slot(i)
        self.pretty_string_for_encounter(encounter_array_for_slot(i)) 
     end
@@ -77,5 +96,87 @@ class EncounterTableMaker
             pretty_string += "#{count}x #{key.name}, " 
         end
         pretty_string[0...-2]
+    end
+    
+    def self.xp_for_encounter(encounter_array)
+        xp_total = 0
+        encounter_array.each do |monster|
+            xp_total += self.xp_for_cr(monster.cr) 
+        end
+        xp_total
+    end
+    
+    #TODO: see if there's a formula for this (I don't think think that there is a nice one)
+    def self.xp_for_cr(cr)
+        case cr
+        when 0
+            10
+        when 0.125
+            25
+        when 0.25
+            50
+        when 0.5
+            100
+        when 1
+            200
+        when 2
+            450
+        when 3
+            700
+        when 4
+            1100
+        when 5
+            1800
+        when 6
+            2300
+        when 7
+            2900
+        when 8
+            3900
+        when 9
+            5000
+        when 10
+            5900
+        when 11 
+            7200
+        when 12
+            8400
+        when 13
+            10000
+        when 14
+            11500
+        when 15
+            13000
+        when 16
+            15000
+        when 17
+            18000
+        when 18
+            20000
+        when 19
+            22000
+        when 20
+            25000
+        when 21
+            33000
+        when 22
+            41000
+        when 23
+            50000
+        when 24
+            62000
+        when 25
+            75000
+        when 26
+            90000
+        when 27
+            105000
+        when 28
+            120000
+        when 29
+            135000
+        when 30
+            155000
+        end
     end
 end
