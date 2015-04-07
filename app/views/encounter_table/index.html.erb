@@ -1,7 +1,7 @@
 <div class="container">
 <div class="encounters">
 <h1>Encounter Table</h1>
-<p class="tooltip">Selecting multiple terrain types allows you to pull from both terrain pools</p>
+<p class="tooltip">Selecting multiple terrain types allows you to pull from both terrain pools increasing the overall possible monsters. It does not only pull monsters that share both terrain types. If you want to make a hybrid terrain, add one and assign it to the monsters that inhabit it.</p>
 <%= form_tag "/encounter_table/update" do |f| %>
     <label class="field-label">Terrain:</label>
     <ul class="terrain-list">
