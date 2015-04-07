@@ -1,24 +1,26 @@
+# MonsterMeeter
+_Random encounter generator for D&D (any edition) and any other RPG that uses the concept of Challenge Rating._
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+## Features
 
+* Create custom terrains and only roll for monsters in those terrains
+* Add your own monsters
+* Automatic difficulty scaling
+* Encounter rolls based on exponential difficulty curve (3d6 vs 1d20)
+* Prepopulated with D&D 5th Ed Monsters and their default terrains
+* Add a "Hostility" rating and a "Normality" rating to monsters (unused at the moment)
 
-Welcome to your Rails project on Cloud9 IDE!
+## Planned Features
+* Generate encounters based on hostility and normality
 
-To get started, just do the following:
+## Installation
 
-1. Run the project with the "Run Project" button in the menu bar on top of the IDE.
-2. Preview your new app by clicking on the URL that appears in the Run panel below (https://monstermeeter-pinwheeler.c9.io/).
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+1. `$ git clone https://github.com/Pinwheeler/MonsterMeeter.git`
+2. `$ cd MonsterMeeter/`
+3. `$ bundle install`
+5. `$ cd db/`
+6. `$ rake db:drop`
+7. `$ rake db:create`
+8. `$ sqlite3 development.sqlite3 < development.back`
+9. `$ rails s`
+9. Navigate to [http://localhost:3000/](http://localhost:3000/)
