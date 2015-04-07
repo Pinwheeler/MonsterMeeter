@@ -1,16 +1,27 @@
 <div class="container">
     <div class="content-block tiny">
         <p>
-            <strong>Name:</strong>
-            <%= @monster.name %>
-        </p>
-        <p>
-            <strong>CR:</strong>
-            <%= @monster.cr %>
+            <div class="form-field">
+                <strong>Name:</strong>
+                <%= @monster.name %>
+            </div>
+            
+            <div class="form-field">
+                <strong>CR:</strong>
+                <%= @monster.cr %>
+            </div>
+            <div class="form-field">
+                <strong>Normality:</strong>
+                <%= @monster.normality || "none" %>
+            </div>
+            <div class="form-field">
+                <strong>Hostility:</strong>
+                <%= @monster.hostility || "none" %>
+            </div>
         </p>
 
         <%= link_to 'Main', welcome_index_path %> |
-        <%= link_to 'Back', monsters_path %> |
+        <%= link_to 'All', monsters_path %> |
         <%= link_to 'Edit', edit_monster_path(@monster) %><br><br>
         <%= link_to 'Add Another Monster', new_monster_path %>
     </div>

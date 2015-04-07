@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403042453) do
+ActiveRecord::Schema.define(version: 20150406235805) do
 
   create_table "Monsters", force: true do |t|
     t.string   "name"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150403042453) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "terrain_id"
+    t.float    "normality"
+    t.float    "hostility"
   end
 
   add_index "Monsters", ["terrain_id"], name: "index_monsters_on_terrain_id"

@@ -13,13 +13,25 @@
     <% end %>
     
     <p>
-        <%= f.label :name %><br>
-        <%= f.text_field :name %>
-    </p>
-    
-    <p>
-        <%= f.label :cr %><br>
-        <%= f.text_field :cr %>
+        <div class="form-field">
+            <%= f.label :name %><br>
+            <%= f.text_field :name %>
+        </div>
+
+        <div class="form-field">
+            <%= f.label :cr %><br>
+            <%= f.text_field :cr %>
+        </div>
+        
+        <div class="form-field">
+            <%= f.label "Normality (1-100)"%><br>
+            <%= f.text_field :normality %>
+        </div>
+        
+        <div class="form-field">
+            <%= f.label "Hostility (1-100)"%><br>
+            <%= f.text_field :hostility %>
+        </div>
     </p>
     
     <p>
