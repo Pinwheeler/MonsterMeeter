@@ -19,7 +19,16 @@ class EncounterTableController < ApplicationController
             end
         end
         @party_cr = params['party_cr']
-        @encounter_table = EncounterTableMaker.new(@encounter_terrain, @party_cr.to_f)
+        if @party_cr && @encounter_terrain.length > 0
+            if @party_cr.to_f > 0
+                @encounter_table = EncounterTableMaker.new(@encounter_terrain, @party_cr.to_f)
+                @error = false
+            else
+                @error = "Party CR must be greater than 0"
+            end
+        else
+            @error = "Please enter a Party CR and select at least one Terrain"
+        end
         render 'index'
     end
     

@@ -14,7 +14,7 @@
     <%= submit_tag "Create" %>
 <% end %>
 
-<% if @encounter_terrain && @party_cr%>
+<% if !@error %>
     <p class="tooltip">Have players roll 3d6 for travel or overnights. The result of that roll is the encounter</p>
     <p class="tooltip">Press the dice button (&#9860;) for a line to re-roll that individual line</p>
     <%= form_tag "/encounter_table/print", :target => "_blank" do |f| %>
@@ -37,6 +37,13 @@
         </table>
         <%= submit_tag "Print" %>
     <% end %>
+<% end %>
+
+<% if @error %>
+
+    <p class="error">Error: <%= @error %></p>
+    <p class="tooltip">Party CR is the sum of all levels in the party divided by 4</p>
+
 <% end %>
 
 <%= link_to 'Main', welcome_index_path %>

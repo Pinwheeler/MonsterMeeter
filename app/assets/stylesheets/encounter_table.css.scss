@@ -61,6 +61,11 @@ $print_table_border: 1px solid $dark_purple;
     font-style: italic;
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+}
+
 .field-label {
     font-weight: bold;
 }
@@ -97,3 +102,4 @@ input[type=submit] {
 input[type=submit]:hover {
         background:$taupe;
     }
+    
