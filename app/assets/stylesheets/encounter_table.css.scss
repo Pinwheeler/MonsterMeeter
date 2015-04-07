@@ -65,6 +65,23 @@ $print_table_border: 1px solid $dark_purple;
     font-weight: bold;
 }
 
+.button {
+    display: inline;
+    padding:5px 5px; 
+    background:$brown; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+    margin: 0 5px;
+    color: $maroon;
+    font-weight: bold;
+}
+
+.button:hover {
+    background:$taupe;
+}
+
 input[type=submit] {
     padding:5px 15px; 
     background:$brown; 

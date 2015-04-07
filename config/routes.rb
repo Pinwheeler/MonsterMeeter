@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
   get 'welcome/index'
+  
   get 'encounter_table/index'
+  get 'encounter_table/reroll'
   post 'encounter_table/update'
   post 'encounter_table/print'
   

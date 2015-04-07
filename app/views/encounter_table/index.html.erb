@@ -10,12 +10,13 @@
         <% end %>
     </ul><br>
     <p class="sub-list-paragraph"><label class="field-label">Party CR:</label>
-    <%= text_field_tag :party_cr, @party_cr%></p><br>
+    <%= text_field_tag :party_cr, @party_cr, id: "party-cr-field"%></p><br>
     <%= submit_tag "Create" %>
 <% end %>
 
 <% if @encounter_terrain && @party_cr%>
     <p class="tooltip">Have players roll 3d6 for travel or overnights. The result of that roll is the encounter</p>
+    <p class="tooltip">Press the dice button (&#9860;) for a line to re-roll that individual line</p>
     <%= form_tag "/encounter_table/print", :target => "_blank" do |f| %>
         <table class="input-table">
             <tr>
@@ -27,7 +28,7 @@
         
             <% (0..15).each do |i| %>
                 <tr>
-                    <td><%= i+3 %></td>
+                    <td><div class="button reroll" id=<%="reroll_#{i}" %>>&#9860;</div> <%= i+3  %> </td>
                     <td class="long-input"><%= text_field_tag "encounter_#{i}", EncounterTableMaker.pretty_string_for_encounter(@encounter_table.encounter_table[i]) %></td>
                     <td><%= text_field_tag "cr_#{i}", @encounter_table.overall_cr_for_monster_array(@encounter_table.encounter_table[i]) %></td>
                     <td><%= text_field_tag "xp_#{i}", EncounterTableMaker.xp_for_encounter(@encounter_table.encounter_table[i]) %></td>
